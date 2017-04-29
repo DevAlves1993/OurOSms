@@ -1,0 +1,12 @@
+#JAVA
+/target
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+#Other File
+mvnw
+mvnw.cmd
