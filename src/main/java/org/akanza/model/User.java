@@ -24,7 +24,7 @@ public class User implements UserDetails,Serializable
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column(name = "login")
+    @Column(name = "login",unique = true)
     private String login;
     @Column(name = "password")
     private String password;
