@@ -6,7 +6,41 @@
 *.iws
 *.iml
 *.ipr
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# WebUI dependencies
+node_modules/
+bower_components/
+
+# WebUI Builds
+tmp/
+
+# compiled output
+/dist
+/tmp
+/out-tsc
+
+# dependencies
+/node_modules
+
+# System Files
+.DS_Store
+Thumbs.db
 
 #Other File
 mvnw
 mvnw.cmd
+
