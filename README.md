@@ -1,5 +1,5 @@
 # OurOSms English
-OurOSms is an open source software that allows you to send SMS through the Orange Sms service. It allows you to monitor your activities using the OrangeSms service. It offers a user-friendly interface from which you can write your messages to be sent by SMS to your customers and partners.
+OurOSms is an open source software that allows you to send SMS through the [API REST SmsApi of orange Ivory Coast (zone AMEA)](https://www.orangepartner.com/SMS-CI-API). It allows you to monitor your activities using the OrangeSms service. It offers a user-friendly interface from which you can write your messages to be sent by SMS to your customers and partners.
 
 # Feature
 
@@ -37,3 +37,26 @@ java -jar ./build/libs/app-1.0.0.jar
 # If you build with maven jar location will be 
 java -jar ./target/app-1.0.0.jar
 ```
+
+
+## Authors and Contributors
+* In 2017, Amani Christian Cyrille Alves (@DevAlves1993) founded OurOSms.
+
+## Contacts
+
+* Gmail : [alvesamani@gmail.com] (mailto:alvesamani@gmail.com)
+* Twitter [@cyrilleamani] (https://twitter.com/cyrilleamani)
+
+## License
+
+[MIT License](http://www.opensource.org/licenses/mit-license.php) 
+[Introduction to the MIT License](https://opensource.org/osd-annotated)
+
+## Contributing
+If you would like to contribute code you can do so through GitHub by forking the repository and sending a pull request.
+
+The list of the contributions which would be welcome.
+
+* Documentation : Participated in the writing of the documentation.
+* Bugs : Report bugs with of issues.
+* Feature : New Feature.
