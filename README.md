@@ -28,7 +28,7 @@ mvn spring-boot:run
 
 ### Start the API and WebUI server
 ```bash
-# Start the server (8080)
+# Start the server (9090)
 # port and other configurations for API servere is in [./src/main/resources/application.properties](/src/main/resources/application.properties) file
 
 # If you build with gradle jar location will be 
