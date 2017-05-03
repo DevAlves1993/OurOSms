@@ -1,8 +1,10 @@
 package org.akanza.service;
 
-import org.akanza.entity.AuthenticationObject;
+import org.akanza.entity.AuthenticationRequest;
+import org.akanza.entity.AuthenticationResponse;
 import org.akanza.model.User;
 import org.akanza.repository.UserRepository;
+import org.akanza.utils.TokenUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +24,11 @@ public class AccountService
     private UserRepository repository;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private TokenUtils tokenUtils;
 
 
-    public User authenticate(AuthenticationObject authentication)
+    public AuthenticationResponse authenticate(AuthenticationRequest authentication)
     {
         String login = authentication.getLogin();
         User user = repository.findByLogin(login);
@@ -32,7 +36,14 @@ public class AccountService
         {
             String password = authentication.getPassword();
             if(passwordEncoder.matches(password,user.getPassword()))
-                return user;
+            {
+                String token = obtainToken(user);
+                long id = user.getId();
+                String firstName = user.getFirstName();
+                String lastName = user.getLastName();
+                String words = user.getWords();
+                return new AuthenticationResponse(token,id,firstName,lastName,words);
+            }
         }
         return null;
     }
@@ -85,5 +96,14 @@ public class AccountService
     private String encodedPassword(String password)
     {
         return passwordEncoder.encode(password);
+    }
+
+    private String obtainToken(User user)
+    {
+        String login = user.getLogin();
+        String password = user.getPassword();
+        String authority = user.getAuthority()
+                .getAuthority();
+        return tokenUtils.createToken(login, password, authority);
     }
 }

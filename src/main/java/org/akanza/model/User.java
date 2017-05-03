@@ -1,5 +1,6 @@
 package org.akanza.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Email;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -26,6 +27,7 @@ public class User implements UserDetails,Serializable
 
     @Column(name = "login",unique = true)
     private String login;
+    @JsonIgnore
     @Column(name = "password")
     private String password;
     @Column(name = "prenom")

@@ -3,12 +3,12 @@ package org.akanza.entity;
 /**
  * Created by Christian Amani on 03/05/2017.
  */
-public class AuthenticationObject
+public class AuthenticationRequest
 {
     private String login;
     private String password;
 
-    public AuthenticationObject()
+    public AuthenticationRequest()
     {}
 
     public String getLogin()

@@ -37,7 +37,7 @@ public class TokenUtils
     @Value("${akanza.jwt.token}")
     public String secret;
 
-    public String generateToken(String login,String password,String authorities)
+    public String createToken(String login,String password,String authorities)
     {
         Map<String,Object> claims = new HashMap<>();
         claims.put(SUB,login);
