@@ -4,6 +4,8 @@ import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Christian Amani on 01/05/2017.
@@ -32,6 +34,8 @@ public class Customer extends Receiver
     @Column(name = "mail_2")
     @Email
     private String mail2;
+    @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<SmsSent> listSms = new ArrayList<>();
 
     public Customer()
     {
@@ -140,5 +144,10 @@ public class Customer extends Receiver
     public void setMail2(String mail2)
     {
         this.mail2 = mail2;
+    }
+
+    public List<SmsSent> getListSms()
+    {
+        return listSms;
     }
 }

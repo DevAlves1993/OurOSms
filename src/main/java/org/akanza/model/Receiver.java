@@ -9,21 +9,17 @@ import java.util.List;
 /**
  * Created by Christian Amani on 01/05/2017.
  */
+@MappedSuperclass
 public abstract class Receiver
 {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    @OneToMany(mappedBy = "receiver",cascade = CascadeType.ALL,orphanRemoval = true)
-    private List<SmsSent> listSms = new ArrayList<>();
+
 
     public long getId()
     {
         return id;
     }
 
-    public List<SmsSent> getListSms()
-    {
-        return listSms;
-    }
 }

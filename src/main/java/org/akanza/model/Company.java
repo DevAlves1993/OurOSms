@@ -4,6 +4,8 @@ import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Christian Amani on 01/05/2017.
@@ -38,6 +40,8 @@ public class Company extends Receiver
     private String email3;
     @Column(name = "siège")
     private String seat;
+    @OneToMany(mappedBy = "company",cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<SmsSent> listSms = new ArrayList<>();
 
     public Company()
     {

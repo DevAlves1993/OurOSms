@@ -63,6 +63,8 @@
 	</dependencies>
 
 	<build>
+		<sourceDirectory>src/main/java</sourceDirectory>
+
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -123,7 +125,7 @@
                             <goal>copy-resources</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${project.build.outputDirectory}/webui</outputDirectory>
+                            <outputDirectory>${project.basedir}/src/main/resources/webui</outputDirectory>
                             <resources>
                                 <resource>
                                     <directory>${project.basedir}/webui/dist</directory>
@@ -136,7 +138,6 @@
                     </execution>
                 </executions>
             </plugin>
-
 		</plugins>
 	</build>
 

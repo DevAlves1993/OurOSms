@@ -1,9 +1,8 @@
 package org.akanza.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import org.akanza.model.id.IdSmsSent;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -12,11 +11,20 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "SmsSent")
+@IdClass(IdSmsSent.class)
 public class SmsSent implements Serializable
 {
     @Id
     @ManyToOne
-    private Receiver receiver;
+    private Company company;
+
+    @Id
+    @ManyToOne
+    private Customer customer;
+
+    @Id
+    @ManyToOne
+    private Partner partner;
 
     @Id
     @ManyToOne
@@ -31,22 +39,15 @@ public class SmsSent implements Serializable
         // Not implemented
     }
 
-    public SmsSent(Receiver receiver, User user, SMS sms)
+    public SmsSent(Receiver receiver, User user, SMS sms,Company company,Customer customer,Partner partner)
     {
-        this.receiver = receiver;
+        this.company = company;
+        this.customer = customer;
+        this.partner = partner;
         this.user = user;
         this.sms = sms;
     }
 
-    public Receiver getReceiver()
-    {
-        return receiver;
-    }
-
-    public void setReceiver(Receiver receiver)
-    {
-        this.receiver = receiver;
-    }
 
     public User getUser()
     {
@@ -71,7 +72,7 @@ public class SmsSent implements Serializable
     @Override
     public int hashCode()
     {
-        return Objects.hash(receiver,user,sms);
+        return Objects.hash(company,customer,partner,user,sms);
     }
 
     @Override
@@ -82,8 +83,40 @@ public class SmsSent implements Serializable
         if(obj == null || this.getClass() != obj.getClass())
             return false;
         SmsSent smsSent = (SmsSent) obj;
-        return Objects.equals(this.receiver,smsSent.receiver) &&
+        return Objects.equals(this.company,smsSent.company) &&
+                Objects.equals(this.customer,smsSent.customer) &&
+                Objects.equals(this.partner,partner) &&
                 Objects.equals(this.user,smsSent.user) &&
                 Objects.equals(this.sms,smsSent.sms);
+    }
+
+    public Company getCompany()
+    {
+        return company;
+    }
+
+    public void setCompany(Company company)
+    {
+        this.company = company;
+    }
+
+    public Customer getCustomer()
+    {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer)
+    {
+        this.customer = customer;
+    }
+
+    public Partner getPartner()
+    {
+        return partner;
+    }
+
+    public void setPartner(Partner partner)
+    {
+        this.partner = partner;
     }
 }
