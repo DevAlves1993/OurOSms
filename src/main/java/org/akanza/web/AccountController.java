@@ -28,9 +28,9 @@ public class AccountController
         {
             AuthenticationResponse response = service.authenticate(authentication);
             if(response != null)
-                return new ResponseEntity<>(response, HttpStatus.OK);
+                return new ResponseEntity<>(response, HttpStatus.CREATED);
             else
-                return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+                return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }

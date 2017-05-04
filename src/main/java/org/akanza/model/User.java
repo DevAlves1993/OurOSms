@@ -1,6 +1,9 @@
 package org.akanza.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import org.hibernate.validator.constraints.Email;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -47,9 +50,11 @@ public class User implements UserDetails,Serializable
     private String email1;
     @Column(name = "mail_2",unique = true)
     private String email2;
+    @JsonIgnore
     @ManyToOne(optional = false)
     @JoinColumn(name = "authority_id",foreignKey = @ForeignKey(name = "FK_user_authority"))
     private Authority authority;
+    @JsonIgnore
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,orphanRemoval = true)
     private List<SmsSent> listSms = new ArrayList<>();
 
@@ -196,6 +201,12 @@ public class User implements UserDetails,Serializable
     public void setAuthority(Authority authority)
     {
         this.authority = authority;
+    }
+
+    @JsonProperty("authority")
+    public String getStringAuthority()
+    {
+        return this.authority.getAuthority();
     }
 
     @Override
