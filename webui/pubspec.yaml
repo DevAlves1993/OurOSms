@@ -2,13 +2,13 @@ name: webui
 description: A simple AngularDart app
 version: 0.0.1
 #homepage: https://www.example.com
-#author: Christian Amani <email@example.com>
+author: Christian Amani
 
 environment:
   sdk: '>=1.20.1 <2.0.0'
 
 dependencies:
-  angular2: ^3.0.0
+  angular2: '>=2.2.0 <3.0.0'
 
 dev_dependencies:
   browser: ^0.10.0
