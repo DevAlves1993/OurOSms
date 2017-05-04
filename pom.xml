@@ -92,26 +92,6 @@
                 </configuration>
             </plugin>
 
-            <plugin>
-                <groupId>com.googlecode.maven-download-plugin</groupId>
-                <artifactId>download-maven-plugin</artifactId>
-                <version>1.3.0</version>
-                <executions>
-                    <!-- Download redoc (enable it when building for production) -->
-                    <execution>
-                        <phase>validate</phase>
-                        <goals>
-                            <goal>wget</goal>
-                        </goals>
-                        <configuration>
-                            <url>https://rebilly.github.io/ReDoc/releases/latest/redoc.min.js</url>
-                            <outputFileName>redoc.min.js</outputFileName>
-                            <outputDirectory>${project.basedir}/src/main/resources/public/redoc</outputDirectory>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
             <!-- *** RESOURCE PLUGIN *** -->
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
@@ -128,7 +108,7 @@
                             <outputDirectory>${project.basedir}/src/main/resources/webui</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>${project.basedir}/webui/dist</directory>
+                                    <directory>${project.basedir}/webui/build/web</directory>
                                     <excludes>
                                         <exclude>*.gz</exclude>
                                     </excludes>
