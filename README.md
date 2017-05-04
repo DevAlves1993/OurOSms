@@ -11,10 +11,10 @@ OurOSms is an open source software that allows you to send SMS through the [API 
 
 ### Install Frontend
 ```bash
-# Navigate to PROJECT_FOLDER/webui (should cntain package.json )
-npm install
+# Navigate to PROJECT_FOLDER/webui (should contain pubspec.yaml )
+pub get
 # build the project (this will put the files under dist folder)
-ng build -prod --aot=false
+pub build
 ```
 
 ### Install Backend (SpringBoot Java)
