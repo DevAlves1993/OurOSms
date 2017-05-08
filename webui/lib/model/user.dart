@@ -14,6 +14,28 @@ class User {
     User(this._id,this._login,this._firstName,this._lastName,this._words,this._created,this._numberPhone1
     ,this._numberPhone2,this._email1,this._email2,this._authority);
 
+    User.fromJson(Map<String,dynamic> json)
+    {
+        int id = _asInt(json["id"]);
+        if(id != -1)
+        {
+            this._id = id;
+            this._login = json["login"];
+            this._firstName = json["firstName"];
+            this._lastName = json["lastName"];
+            this._words = json["words"];
+            this._created = _asDateTime(json["created"]);
+            this._numberPhone1 = json["numberPhone1"];
+            this._numberPhone2 = json["numberPhone2"];
+            this._email1 = json["email1"];
+            this._email2 = json["email2"];
+            this._authority = json["authority"];
+        }
+    }
+
+    int _asInt(String value) => value is int ? value : int.parse(value,onError: (s) => -1);
+    DateTime _asDateTime(String value) => DateTime.parse(value);
+
     set id(int id) => _id = id;
     int get id => _id;
     set login(String login) => _login = login;
@@ -47,5 +69,19 @@ class UserInfo {
     String words;
 
     UserInfo(this.token,this.userId,this.firstName,this.lastName,this.words);
-    
+
+    UserInfo.fromJson(Map<String,dynamic> json)
+    {
+        userId = _asInt(json["userId"]);
+        if(userId != -1)
+        {
+            token = json["token"];
+            firstName = json["firstName"];
+            lastName = json["lastName"];
+            words = json["words"];
+        }
+    }
+
+    int _asInt(String value) => value is int ? value : int.parse(value,onError: (s) => -1);
+
 }

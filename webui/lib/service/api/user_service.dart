@@ -15,20 +15,22 @@ class UserService extends ApiService {
 
     Future<List<User>> findAll() async
     {
-        Map<String,String> head = createHeaderAuthorisationForGet();
+        Map<String,String> head = createHeaderAuthorisation();
         if(head != null)
         {
             Response response = await _client.get("/api/users",headers: head);
             if(response.statusCode == 200)
             {
                 String body = response.body;
-                List<User> list = JSON.decode(body);
-                _LOG.info("Request for get all User was perform with success. \nStatus code is 200");
+                List<User> list = JSON.decode(body)["data"]
+                    .map((value)=> new User.fromJson(value))
+                    .toList();
+                _LOG.info("The query is executed successfully. \nStatus code is 200");
                 return list;
             }
             else if(response.statusCode == 404)
             {
-                _LOG.info("Request get all user have fail.\nStatus code is 404");
+                _LOG.info("The request to fail.\nStatus code is 404");
             }
         }
         return null;
@@ -36,20 +38,21 @@ class UserService extends ApiService {
 
     Future<User> find(String id) async 
     {
-        Map<String,String> head = createHeaderAuthorisationForGet();
+        Map<String,String> head = createHeaderAuthorisation();
         if(head != null)
         {
-            Response response = await _client.get("/api/users/id",headers: head);
+            Response response = await _client.get("/api/users/"+id,headers: head);
             if(response.statusCode == 200)
             {
                 String body = response.body;
-                User user = JSON.decode(body);
-                _LOG.info("The request to success. \nStatus code is 200");
+                dynamic value = JSON.decode(body)["data"];
+                User user = new User.fromJson(value);
+                _LOG.info("The query is executed successfully. \nStatus code is 200");
                 return user;
             }
             else if(response.statusCode == 404)
             {
-                _LOG.info("The request to fail. \Status code is 404");
+                _LOG.info("The request to fail. \nStatus code is 404");
             }
         }
         return null;
@@ -68,19 +71,37 @@ class UserService extends ApiService {
             if(response.statusCode == 201 || response.statusCode == 200)
             {
                 String body = response.body;
-                User user = JSON.decode(body);
-                _LOG.info("The request to success. \Status code is "+response.statusCode.toString());
+                dynamic value = JSON.decode(body)["data"];
+                User user = new User.fromJson(value);
+                _LOG.info("The query is executed successfully. \nStatus code is "+response.statusCode.toString());
                 return user;
             }
             else if(response.statusCode == 404)
             {
-                _LOG.info("The request to fail. \Status code is 404");
+                _LOG.info("The request to fail. \nStatus code is 404");
             }
             else if(response.statusCode >= 500)
             {
-                _LOG.info("The request to fail. \Status code is 500");
+                _LOG.info("The request to fail. \nStatus code is 500");
             }
         }
         return null;
+    }
+
+    delete(String id) async 
+    {
+        Map<String,String> head = createHeaderAuthorisation();
+        if(head != null)
+        {
+            Response response = await _client.delete("/api/auth/users/"+id);
+            if(response.statusCode == 200)
+            {
+                _LOG.info("The query is executed successfully. \nStatus code is 200");
+            }
+            else
+            {
+                _LOG.info("The request to fail. \nStatus code is "+response.statusCode.toString());
+            }
+        }
     }
 }

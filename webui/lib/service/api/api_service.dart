@@ -2,7 +2,7 @@ import 'package:webui/service/authentication/login_service.dart';
 
 class ApiService {
 
-    Map<String,String> createHeaderAuthorisationForGet() {
+    Map<String,String> createHeaderAuthorisation() {
         String authorisation = LoginService.token;
         if(authorisation != null && authorisation.isNotEmpty)
         {
