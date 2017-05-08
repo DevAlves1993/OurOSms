@@ -9,12 +9,13 @@ import 'package:webui/model/user.dart';
 @Injectable()
 class LoginService
 {
-    UserInfo _userInfo;
+    static UserInfo _userInfo;
     Client _client;
     html.Storage _storage;
     LoginService(this._storage,this._client);
 
-    UserInfo get token => _userInfo;
+    static String get token => _userInfo.token;
+    static UserInfo get userInfo => _userInfo;
 
     Future submitAuthentication(AuthenticationBody request) async
     {
@@ -24,7 +25,8 @@ class LoginService
 
     void saveUserInfo(UserInfo user) 
     {
-        _storage.addAll({user.userId: user.token});
+        _userInfo = user;
+        _storage.addAll({_userInfo.userId: _userInfo.token});
     }
 }
 

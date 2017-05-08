@@ -6,6 +6,7 @@ import 'package:angular_components/src/components/material_input/material_input.
 import 'package:http/http.dart';
 import 'package:logging/logging.dart';
 import 'package:webui/model/user.dart';
+import 'package:webui/service/authentication/login_service.dart';
 import 'package:webui/service/login_service.dart';
 
 @Component(
