@@ -13,6 +13,27 @@ class Customer {
     Customer(this._id,this._firstName,this._lastName,this._created,this._words,this._numberPhone1,this._numberPhone2
     ,this._numberPhone3,this._email1,this._email2);
 
+    Customer.fromJson(Map<String,dynamic> json)
+    {
+        int id = _asInt(json["id"]);
+        if(id != -1)
+        {
+            _id = id;
+            _firstName = json["firstName"];
+            _lastName = json["lastName"];
+            _created = _asDateTime(json["created"]);
+            _words = json["words"];
+            _numberPhone1 = json["numberPhone1"];
+            _numberPhone2 = json["numberPhone2"];
+            _numberPhone3 = json["numberPhone3"];
+            _email1 = json["email1"];
+            _email2 = json["email2"];
+        }
+    }
+
+    int _asInt(String value) => value is int ? value : int.parse(value,onError: (s) => -1);
+    DateTime _asDateTime(String value) => DateTime.parse(value);
+
     set id(int id) => _id = id;
     int get id => _id;
     set firstName(String firstName) => _firstName = firstName;

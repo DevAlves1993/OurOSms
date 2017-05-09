@@ -15,6 +15,28 @@ class Company {
     Company(this._id,this._name,this._urlWebSite,this._words,this._created,this._numberPhone1,this._numberPhone2
     ,this._numberPhone3,this._email1,this._email2,this._email3,this._seat);
 
+    Company.fromJson(Map<String,dynamic> json)
+    {
+        int id = _asInt(json["id"]);
+        if(_id != -1)
+        {
+            _id = id;
+            _name = json["name"];
+            _urlWebSite = json["urlWebSite"];
+            _words = json["words"];
+            _created = _asDateTime(json["created"]);
+            _numberPhone1 = json["numberPhone1"];
+            _numberPhone2 = json["numberPhone2"];
+            _numberPhone3 = json["numberPhone3"];
+            _email1 = json["email1"];
+            _email2 = json["email2"];
+            _email3 = json["email3"];
+            _seat = json["seat"];
+        }
+    }
+
+    int _asInt(String value) => value is int ? value : int.parse(value,onError: (s) => -1);
+    DateTime _asDateTime(String value) => DateTime.parse(value);
 
     set id(int id) => _id = id;
     int get id => _id;

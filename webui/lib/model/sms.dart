@@ -9,11 +9,18 @@ class SMS {
 
     SMS.fromJson(Map<String,dynamic> json)
     {
-
+        int id = _asInt(json["id"]);
+        if(id != -1)
+        {
+            _id = id;
+            _content = json["content"];
+            _senderName = json["senderName"];
+            _senderAddress = json["senderAddress"];
+            _country = json["country"];
+        }
     }
 
     int _asInt(String value) => value is int ? value : int.parse(value,onError: (s) => -1);
-
 
     set id(int id) => _id = id;
     int get id => _id;
