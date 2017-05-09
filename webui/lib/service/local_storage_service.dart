@@ -18,5 +18,4 @@ class LocalStorageService {
         if(_storage.containsKey(userId))
             _storage.remove(userId);
     }
-       
 }

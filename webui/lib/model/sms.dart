@@ -7,6 +7,14 @@ class SMS {
 
     SMS(this._id,this._content,this._senderName,this._senderAddress,this._country);
 
+    SMS.fromJson(Map<String,dynamic> json)
+    {
+
+    }
+
+    int _asInt(String value) => value is int ? value : int.parse(value,onError: (s) => -1);
+
+
     set id(int id) => _id = id;
     int get id => _id;
     set content(String content) =>_content;

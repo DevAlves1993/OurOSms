@@ -7,7 +7,6 @@ import 'package:http/http.dart';
 import 'package:logging/logging.dart';
 import 'package:webui/model/user.dart';
 import 'package:webui/service/authentication/login_service.dart';
-import 'package:webui/service/login_service.dart';
 
 @Component(
     selector: "login-component",
@@ -22,7 +21,7 @@ class LoginComponent {
     LoginService _service; 
     AuthenticationBody body;
     String errorMsg = "";
-
+    
     LoginComponent(this._router,this._service);
 
     void login()
@@ -35,7 +34,8 @@ class LoginComponent {
     {
         if(response.statusCode == 201)
         {
-            UserInfo userInfo = JSON.decode(response.body);
+            dynamic value = JSON.decode(response.body)["data"];
+            UserInfo userInfo = new UserInfo.fromJson(value);
             _service.saveUserInfo(userInfo);
             _LOG.info("User Info was save with success");
         }

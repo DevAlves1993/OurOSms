@@ -3,11 +3,11 @@
         <p style="text-align: center">Authentification</p>
     </div>
     <form class="" name="form" #form="ngForm">
-        <material-input type="text" [(ngModel)]="body.login" required="false"></material-input>
-        <material-input type="text" [(ngModel)]="body.password" required="false"></material-input>
+        <material-input type="text" [(ngModel)]="body.login" required="true" hintText="Login"></material-input>
+        <material-input type="text" [(ngModel)]="body.password" required="true" hintText="Password"></material-input>
         <material-button raised="true" (trigger)="login()"></material-button>
     </form>
-    <div class="">
+    <div class="w3-panel w3-card-4 we-red">
         <div *ngIf="errorMsg.isNotEmpty()" style="color:indianred; font-weight: bold">{{errorMsg}}</div>
     </div>
 </div>
