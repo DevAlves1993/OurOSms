@@ -1,0 +1,113 @@
+{
+  "ngDeps": {
+    "1": "",
+    "3": [
+      {
+        "1": "dart:async",
+        "5": false
+      },
+      {
+        "1": "dart:convert",
+        "5": false
+      },
+      {
+        "1": "package:angular2/core.dart",
+        "5": false
+      },
+      {
+        "1": "package:http/http.dart",
+        "5": false
+      },
+      {
+        "1": "package:webui/model/user.dart",
+        "5": false
+      },
+      {
+        "1": "package:webui/service/local_storage_service.dart",
+        "5": false
+      }
+    ],
+    "5": [
+      {
+        "1": "LoginService",
+        "4": [
+          {
+            "1": "Injectable",
+            "4": false
+          }
+        ],
+        "5": [
+          {
+            "1": "LocalStorageService",
+            "4": "_storageService"
+          },
+          {
+            "1": "Client",
+            "4": "_client"
+          }
+        ]
+      }
+    ],
+    "6": "login_service.dart"
+  },
+  "type": {
+    "AuthenticationBody": {
+      "class": "Identifier",
+      "name": "AuthenticationBody",
+      "moduleUrl": "asset:webui/lib/service/authentication/login_service.dart",
+      "prefix": null,
+      "value": null
+    },
+    "LoginService": {
+      "class": "Type",
+      "name": "LoginService",
+      "moduleUrl": "asset:webui/lib/service/authentication/login_service.dart",
+      "prefix": null,
+      "isHost": false,
+      "value": null,
+      "diDeps": [
+        {
+          "token": {
+            "value": null,
+            "identifier": {
+              "class": "Identifier",
+              "name": "LocalStorageService",
+              "moduleUrl": null,
+              "prefix": null,
+              "value": null
+            },
+            "identifierIsInstance": false
+          },
+          "value": null,
+          "isAttribute": false,
+          "isSelf": false,
+          "isHost": false,
+          "isSkipSelf": false,
+          "isOptional": false,
+          "isValue": false
+        },
+        {
+          "token": {
+            "value": null,
+            "identifier": {
+              "class": "Identifier",
+              "name": "Client",
+              "moduleUrl": null,
+              "prefix": null,
+              "value": null
+            },
+            "identifierIsInstance": false
+          },
+          "value": null,
+          "isAttribute": false,
+          "isSelf": false,
+          "isHost": false,
+          "isSkipSelf": false,
+          "isOptional": false,
+          "isValue": false
+        }
+      ]
+    }
+  },
+  "alias": {}
+}

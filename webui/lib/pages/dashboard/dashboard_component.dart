@@ -8,7 +8,7 @@ import 'package:webui/service/local_storage_service.dart';
     ,providers: const [LocalStorageService])
 class DashboardComponent implements CanActivate
 {
-    final LocalStorageService _localStorage;
+    LocalStorageService _localStorage;
     Router _router;
 
     DashboardComponent(this._localStorage,this._router);

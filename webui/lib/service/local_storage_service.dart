@@ -6,15 +6,20 @@ import 'package:webui/model/user.dart';
 
 @Injectable()
 class LocalStorageService {
-    Storage _storage;
+    Storage _storage = window.localStorage;
     final String _CURRENT_USER_KEY = "currentUser";
-
-    LocalStorageService(this._storage);
 
     void saveUserInfo(UserInfo userInfo)
     {
         String value = JSON.encode(userInfo);
         _storage.addAll({_CURRENT_USER_KEY: value});
+    }
+
+    UserInfo currentUserInfo()
+    {
+        String json = window.sessionStorage[_CURRENT_USER_KEY];
+        Map<String,dynamic> value= JSON.decode(json)["data"];
+        return new UserInfo.fromJson(value);
     }
 
     bool verifyIfCurrentUserExist()

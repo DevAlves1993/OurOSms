@@ -10,14 +10,16 @@ import 'package:webui/pages/login/login_component.dart';
 
 @Component(selector: 'my-app',
   templateUrl: "app.html",
-  styleUrls: const ["app.css","asset/w3.css"])
+  styleUrls: const ["app.css","asset/w3.css"]
+  ,directives: const [ROUTER_DIRECTIVES]
+  ,providers: const [ROUTER_PROVIDERS])
 @RouteConfig(const [
   const Redirect(path: "/",redirectTo: const [DashboardComponent]),
-  const Route(path:"/index",name:"Dashboard",component:DashboardComponent),
+  const Redirect(path: "/index.html",redirectTo: const [DashboardComponent]),
+  const Route(path:"/home",name:"Home",component:DashboardComponent),
   const Route(path: "/login",name: "Login",component: LoginComponent,),
   const Route(path: "error/**",name: "Error",component: PageInternalError),
   const Route(path: "/**",name: "Not Found",component: PageNotFound)
 ])
 class AppComponent {
-  var name = 'Angular';
 }

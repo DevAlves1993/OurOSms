@@ -1,0 +1,20 @@
+{
+  "ngDeps": null,
+  "type": {
+    "User": {
+      "class": "Identifier",
+      "name": "User",
+      "moduleUrl": "asset:webui/lib/model/user.dart",
+      "prefix": null,
+      "value": null
+    },
+    "UserInfo": {
+      "class": "Identifier",
+      "name": "UserInfo",
+      "moduleUrl": "asset:webui/lib/model/user.dart",
+      "prefix": null,
+      "value": null
+    }
+  },
+  "alias": {}
+}

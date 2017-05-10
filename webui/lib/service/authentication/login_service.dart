@@ -1,32 +1,31 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:html' as html;
 
 import 'package:angular2/core.dart';
 import 'package:http/http.dart';
 import 'package:webui/model/user.dart';
+import 'package:webui/service/local_storage_service.dart';
 
 @Injectable()
 class LoginService
 {
-    static UserInfo _userInfo;
     Client _client;
-    html.Storage _storage;
-    LoginService(this._storage,this._client);
-
-    static String get token => _userInfo.token;
-    static UserInfo get userInfo => _userInfo;
-
+    LocalStorageService _storageService;
+    LoginService(this._storageService,this._client);
+    
     Future submitAuthentication(AuthenticationBody request) async
     {
        return await _client.post("/api/auth",body: JSON.encode(request));
     }
 
-
     void saveUserInfo(UserInfo user) 
     {
-        _userInfo = user;
-        _storage.addAll({_userInfo.userId: _userInfo.token});
+        _storageService.saveUserInfo(user);
+    }
+
+    UserInfo obtainCurrentUser()
+    {
+        return _storageService.currentUserInfo();
     }
 }
 

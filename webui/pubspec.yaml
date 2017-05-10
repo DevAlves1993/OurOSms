@@ -25,6 +25,6 @@ transformers:
     - 'package:angular2/common.dart#COMMON_PIPES'
     entry_points: web/main.dart
     resolved_identifiers:
-    BrowserClient: 'package:http/browser_client.dart'
-    Client: 'package:http/http.dart'
+      BrowserClient: 'package:http/browser_client.dart'
+      Client: 'package:http/http.dart'
 - dart_to_js_script_rewriter

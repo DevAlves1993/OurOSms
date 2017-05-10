@@ -1,0 +1,13 @@
+{
+  "ngDeps": null,
+  "type": {
+    "Partner": {
+      "class": "Identifier",
+      "name": "Partner",
+      "moduleUrl": "asset:webui/lib/model/partner.dart",
+      "prefix": null,
+      "value": null
+    }
+  },
+  "alias": {}
+}

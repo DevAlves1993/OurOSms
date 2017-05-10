@@ -5,13 +5,14 @@ import 'package:http/http.dart';
 import 'package:logging/logging.dart';
 import 'package:webui/model/user.dart';
 import 'package:webui/service/api/api_service.dart';
+import 'package:webui/service/authentication/login_service.dart';
 
 @Injectable()
 class UserService extends ApiService {
     final Client _client;
     final Logger _LOG = new Logger("UserService");
 
-    UserService(this._client);
+    UserService(this._client) : super(null);
 
     Future<List<User>> findAll() async
     {
