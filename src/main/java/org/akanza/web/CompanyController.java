@@ -1,7 +1,6 @@
 package org.akanza.web;
 
 import org.akanza.model.Company;
-import org.akanza.repository.CompanyRepository;
 import org.akanza.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

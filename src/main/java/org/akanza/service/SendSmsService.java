@@ -7,7 +7,6 @@ import org.akanza.osms.core.exception.HttpApiOAuthOrangeException;
 import org.akanza.osms.core.exception.HttpApiOrangeException;
 import org.akanza.osms.model.OrangeSMS;
 import org.akanza.osms.model.response.error.ServiceException;
-import org.akanza.repository.SMSRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +25,7 @@ public class SendSmsService
     private static OSms oSms;
     private static boolean oSmsIsInit = false;
     @Autowired
-    private SMSRepository repository;
+    private SmsService service;
 
     public SMS saveAndSent(String senderAddress,Optional<String> senderName,String receiver,String content,String country)
     {
@@ -38,7 +37,7 @@ public class SendSmsService
                 sms = new SMS(receiver,content,senderName.get(),senderAddress,country);
             else
                 sms = new SMS(receiver,content,"",senderAddress,country);
-            sms = repository.save(sms);
+            sms = service.save(sms);
             return sms;
         }
         return null;

@@ -30,7 +30,7 @@ public class SmsService
         return repository.findAll();
     }
 
-    public SMS create(SMS sms)
+    public SMS save(SMS sms)
     {
         sms = repository.save(sms);
         LOG.info("SMS was created");
