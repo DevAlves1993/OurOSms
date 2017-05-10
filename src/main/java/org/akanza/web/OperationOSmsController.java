@@ -1,7 +1,9 @@
 package org.akanza.web;
 
 import org.akanza.service.SMSOrangeAccessService;
+import org.akanza.utils.TokenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,11 +19,17 @@ public class OperationOSmsController
 {
     @Autowired
     private SMSOrangeAccessService service;
+    @Autowired
+    private TokenUtils utils;
 
     @PostMapping(value = "/osms")
     private ResponseEntity operate(@RequestBody String token)
     {
-        // TODO : implement later
-        return null;
+        String secretId = utils.getSecretId(token);
+        String secretKey = utils.getSecretKey(token);
+        boolean isInit = service.writeAccessOrange(secretId, secretKey);
+        if(isInit)
+            return new ResponseEntity(HttpStatus.CREATED);
+        return new ResponseEntity(HttpStatus.NOT_FOUND);
     }
 }

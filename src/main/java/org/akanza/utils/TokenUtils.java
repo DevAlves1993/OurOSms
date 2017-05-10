@@ -30,6 +30,8 @@ public class TokenUtils
     private final String PASSWORD = "password";
     private final String CREATED = "created";
     private final String EXPIRED = "expired";
+    private final String TOKEN_SECRET_KEY = "secretKey";
+    private final String TOKEN_ID = "secretId";
 
     @Value("${akanza.jwt.expiration}")
     public long expiration;
@@ -92,6 +94,18 @@ public class TokenUtils
     {
         Claims claims = getClaims(token);
         return (String) claims.get(PASSWORD);
+    }
+
+    public String getSecretKey(String token)
+    {
+        Claims claims = getClaims(token);
+        return (String) claims.get(TOKEN_SECRET_KEY);
+    }
+
+    public String getSecretId(String token)
+    {
+        Claims claims = getClaims(token);
+        return (String) claims.get(TOKEN_ID);
     }
 
     private String encoded(Map<String, Object> claims)

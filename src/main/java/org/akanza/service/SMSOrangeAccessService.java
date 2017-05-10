@@ -33,6 +33,7 @@ public class SMSOrangeAccessService
             writer.close();
             writeAccessWithSuccess = true;
             LOG.info("Orange Access was well recorded");
+            readAccessOrange();
         }
         catch(IOException e)
         {
@@ -42,7 +43,7 @@ public class SMSOrangeAccessService
         return writeAccessWithSuccess;
     }
 
-    public void readAccessOrange()
+    private void readAccessOrange()
     {
         try
         {
