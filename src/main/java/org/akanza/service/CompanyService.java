@@ -44,4 +44,9 @@ public class CompanyService
         LOG.info("Company was updated");
         return company;
     }
+
+    public void delete(long id)
+    {
+        repository.delete(id);
+    }
 }
