@@ -1,6 +1,6 @@
 #JAVA
 /target
-
+/src/main/resources/webui
 ### IntelliJ IDEA ###
 .idea
 *.iws
