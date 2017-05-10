@@ -37,7 +37,7 @@ public class AccountController
 
     @PostMapping(value = "/users",consumes = {MediaType.APPLICATION_JSON_VALUE}
             ,produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<User> createUser(User user)
+    public ResponseEntity<User> createUser(@RequestBody User user)
     {
         if(user != null)
         {
@@ -47,9 +47,9 @@ public class AccountController
         return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
     }
 
-    @PutMapping(value = "/users/{id}",consumes = {MediaType.APPLICATION_JSON_VALUE}
+    @PutMapping(value = "/users",consumes = {MediaType.APPLICATION_JSON_VALUE}
             ,produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<User> updateUser(@PathVariable long id,User user)
+    public ResponseEntity<User> updateUser(User user)
     {
         if(user != null)
         {

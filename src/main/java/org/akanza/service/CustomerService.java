@@ -30,7 +30,7 @@ public class CustomerService
         return repository.findAll();
     }
 
-    public Customer create(Customer customer)
+    public Customer save(Customer customer)
     {
         customer = repository.save(customer);
         LOG.info("Customer was created");
