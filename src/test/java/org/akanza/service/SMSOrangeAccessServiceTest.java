@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
  * Created by Christian Amani on 10/05/2017.
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = {SMSOrangeAccessService.class})
+@SpringBootTest
 public class SMSOrangeAccessServiceTest
 {
 
@@ -22,19 +22,25 @@ public class SMSOrangeAccessServiceTest
     @Test
     public void writeAccessOrange() throws Exception
     {
-
+        boolean b = service.writeAccessOrange("clientId", "secretKey");
+        assertTrue(b);
     }
 
     @Test
     public void getClientId() throws Exception
     {
-
+        service.readAccessOrange();
+        String clientId = service.getClientId();
+        assertNotNull(clientId);
+        System.out.println(clientId);
     }
 
     @Test
     public void getSecretKey() throws Exception
     {
-
+        String secretKey = service.getSecretKey();
+        assertNotNull(secretKey);
+        System.out.println(secretKey);
     }
 
 }

@@ -24,8 +24,12 @@ public class SMSOrangeAccessService
         boolean writeAccessWithSuccess = false;
         try
         {
-            OutputStream outputStream = new FileOutputStream(pathResource.getFile());
-            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outputStream));
+            File file = pathResource.getFile();
+            System.out.println(file);
+            file.setWritable(true);
+            file.setReadable(true);
+            FileWriter fileWriter = new FileWriter(file);
+            BufferedWriter writer = new BufferedWriter(fileWriter);
             writer.write(clientId);
             writer.newLine();
             writer.write(secretKey);
@@ -43,7 +47,7 @@ public class SMSOrangeAccessService
         return writeAccessWithSuccess;
     }
 
-    private void readAccessOrange()
+    public void readAccessOrange()
     {
         try
         {

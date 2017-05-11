@@ -29,6 +29,7 @@ public class Authority
 
     public Authority(String... authority)
     {
+        this.authority = "";
         this.authorities = AuthorityUtils.createAuthorityList(authority);
         setAuthority();
     }
@@ -41,6 +42,7 @@ public class Authority
     public void setAuthority(List<GrantedAuthority> authorities)
     {
         this.authorities = authorities;
+        this.authority = "";
         setAuthority();
     }
 
@@ -51,9 +53,13 @@ public class Authority
             if(this.authority.isEmpty())
                 this.authority = authority;
             else
-                this.authority = ", "+authority;
+                this.authority += ", "+authority;
         });
     }
 
 
+    public long getId()
+    {
+        return id;
+    }
 }

@@ -112,7 +112,7 @@ public class TokenUtils
     {
         String token =  Jwts.builder()
                 .setClaims(claims)
-                .signWith(SignatureAlgorithm.ES256,secret)
+                .signWith(SignatureAlgorithm.HS512,secret)
                 .compact();
         LOG.info("New token is create");
         return token;
