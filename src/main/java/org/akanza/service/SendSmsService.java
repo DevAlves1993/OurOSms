@@ -1,12 +1,12 @@
 package org.akanza.service;
 
 import org.akanza.model.SMS;
-import org.akanza.osms.OSms;
-import org.akanza.osms.core.CountryCode;
-import org.akanza.osms.core.exception.HttpApiOAuthOrangeException;
-import org.akanza.osms.core.exception.HttpApiOrangeException;
-import org.akanza.osms.model.OrangeSMS;
-import org.akanza.osms.model.response.error.ServiceException;
+import io.github.devalves.osms.OSms;
+import io.github.devalves.osms.core.CountryCode;
+import io.github.devalves.osms.core.exception.HttpApiOAuthOrangeException;
+import io.github.devalves.osms.core.exception.HttpApiOrangeException;
+import io.github.devalves.osms.model.OrangeSMS;
+import io.github.devalves.osms.model.response.error.ServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
