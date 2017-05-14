@@ -47,12 +47,12 @@ java -jar ./target/app-1.0.0.jar
 
 ### Christian Amani
 
-* Gmail : [alvesamani@gmail.com] (mailto:alvesamani@gmail.com)
-* Twitter [@cyrilleamani] (https://twitter.com/cyrilleamani)
+* Gmail : [alvesamani@gmail.com](mailto:alvesamani@gmail.com)
+* Twitter [@cyrilleamani](https://twitter.com/cyrilleamani)
 
 ### Guy Gouri
 
-* Gmail : [guysenpai@gmail.com] (mailto:guysenpai@gmail.com)
+* Gmail : [guysenpai@gmail.com](mailto:guysenpai@gmail.com)
 
 ## License
 
