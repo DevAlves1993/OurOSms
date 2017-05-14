@@ -22,11 +22,14 @@
 !.vscode/extensions.json
 
 # WebUI dependencies
-webui/.packages
-webui/.pub/
-webui/build/
+webui/node_modules/
+webui/bower_components/
 # Remove the following pattern if you wish to check in your lock file
 pubspec.lock
+
+# misc
+**/.sass-cache
+**/npm-debug.log
 
 # Directory created by dartdoc
 webui/doc/api/
@@ -35,9 +38,9 @@ webui/doc/api/
 tmp/
 
 # compiled output
-/dist
-/tmp
-/out-tsc
+webui/dist
+webui/tmp
+webui/out-tsc
 
 
 # System Files

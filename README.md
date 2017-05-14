@@ -11,10 +11,10 @@ OurOSms is an open source software that allows you to send SMS through the [API 
 
 ### Install Frontend
 ```bash
-# Navigate to PROJECT_FOLDER/webui (should contain pubspec.yaml )
-pub get
+# Navigate to PROJECT_FOLDER/webui (should cntain package.json )
+npm install
 # build the project (this will put the files under dist folder)
-pub build
+ng build -prod --aot=false
 ```
 
 ### Install Backend (SpringBoot Java)
@@ -41,11 +41,18 @@ java -jar ./target/app-1.0.0.jar
 
 ## Authors and Contributors
 * In 2017, Amani Christian Cyrille Alves (@DevAlves1993) founded OurOSms.
+* In 2017, Gouri Guy (@guysenpai) contributor. 
 
 ## Contacts
 
+### Christian Amani
+
 * Gmail : [alvesamani@gmail.com] (mailto:alvesamani@gmail.com)
 * Twitter [@cyrilleamani] (https://twitter.com/cyrilleamani)
+
+### Guy Gouri
+
+* Gmail : [guysenpai@gmail.com] (mailto:guysenpai@gmail.com)
 
 ## License
 
