@@ -73,6 +73,12 @@ public class AccountService
                 LOG.info("Password of user was update");
                 return newUser;
             }
+            else
+            {
+                // TODO : throw exception security
+                LOG.info("Old Password not matched with originalPassword");
+                return null;
+            }
         }
         LOG.info("Changing the user's password to fail");
         return null;
