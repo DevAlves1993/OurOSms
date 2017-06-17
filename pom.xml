@@ -43,12 +43,14 @@
 			<artifactId>jjwt</artifactId>
 			<version>0.7.0</version>
 		</dependency>
+		<dependency>
+			<groupId> io.github.devalves1993</groupId>
+			<artifactId>osms-java</artifactId>
+			<version>1.0.0</version>
+		</dependency>
         <dependency>
-            <groupId>io.github.devalves</groupId>
-            <artifactId>osms-java</artifactId>
-            <version>1.0.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/lib/OSmsJava.jar</systemPath>
+            <groupId>io.projectreactor</groupId>
+            <artifactId>reactor-core</artifactId>
         </dependency>
 
 		<dependency>
