@@ -55,8 +55,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter
     @Override
     public void configure(WebSecurity web) throws Exception
     {
-        web.ignoring().antMatchers("/", "/resources/**", "/static/**", "/public/**", "/webui/**", "/h2-console/**"
-                , "/*.html", "/**/*.html" ,"/**/*.css","/**/*.js","/**/*.png","/**/*.jpg", "/**/*.gif", "/**/*.svg", "/**/*.ico", "/**/*.ttf","/**/*.woff");
+        web.ignoring().antMatchers("/", "/resources/**", "/static/**", "/public/**"
+                , "/webui/**", "/h2-console/**", "/*.html", "/**/*.html" ,"/**/*.css","/**/*.js"
+                ,"/**/*.png","/**/*.jpg", "/**/*.gif", "/**/*.svg", "/**/*.ico", "/**/*.ttf","/**/*.woff"
+                ,"/swagger-resources/**","/v2/api-docs/**","/webjars/**");
     }
 
     @Override

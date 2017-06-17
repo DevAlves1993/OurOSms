@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
  * Created by Christian Amani on 03/05/2017.
  */
 @RestController
-@RequestMapping("api/auth")
+@RequestMapping("/api/auth")
 public class AccountController
 {
     @Autowired

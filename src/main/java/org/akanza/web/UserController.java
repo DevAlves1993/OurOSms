@@ -17,10 +17,10 @@ import java.util.List;
  * Created by Christian Amani on 09/05/2017.
  */
 @RestController
-@RequestMapping("api/users")
+@RequestMapping("/api/users")
 public class UserController
 {
-    // TODO : implement later
+    
     @Autowired
     private UserService service;
 
