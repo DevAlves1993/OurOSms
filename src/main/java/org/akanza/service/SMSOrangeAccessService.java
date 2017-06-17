@@ -1,7 +1,12 @@
 package org.akanza.service;
 
+import io.github.devalves.osms.OSms;
+import io.github.devalves.osms.core.exception.HttpApiOAuthOrangeException;
+import org.akanza.service.exception.ServiceHttpAuthOrangeException;
+import org.akanza.service.exception.ServiceIoConnectivityException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +21,38 @@ public class SMSOrangeAccessService
     private final Logger LOG = LoggerFactory.getLogger(SMSOrangeAccessService.class);
     private final ClassPathResource pathResource = new ClassPathResource("static/orange-access.txt");
 
+    @Autowired
+    private OSms.BuilderOSms builderOSms;
+
+    private static OSms oSms = null;
     private static String clientId = "";
     private static String secretKey = "";
+    private static boolean oSmsIsConfigure = false;
+
+    public void configServiceOrange()
+    {
+        readAccessOrange();
+        try
+        {
+            oSms = builderOSms.id(clientId)
+                    .secretCode(secretKey)
+                    .build();
+            oSmsIsConfigure = true;
+            LOG.info("Orange Service is configured correctly");
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+            throw new ServiceIoConnectivityException();
+        }
+        catch(HttpApiOAuthOrangeException e)
+        {
+            e.printStackTrace();
+            LOG.error(e.getMessage(),e);
+            LOG.error(e.getDescription(),e);
+            throw new ServiceHttpAuthOrangeException();
+        }
+    }
 
     public boolean writeAccessOrange(String clientId,String secretKey)
     {
@@ -54,7 +89,11 @@ public class SMSOrangeAccessService
             InputStream inputStream = pathResource.getInputStream();
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
             clientId = reader.readLine();
+            if(clientId == null)
+                clientId = "";
             secretKey = reader.readLine();
+            if(secretKey == null)
+                secretKey = "";
             LOG.info("Reading Orange Access Success");
         }
         catch(IOException e)
@@ -64,13 +103,23 @@ public class SMSOrangeAccessService
         }
     }
 
-    public String getClientId()
+    public static String getClientId()
     {
         return clientId;
     }
 
-    public String getSecretKey()
+    public static String getSecretKey()
     {
         return secretKey;
+    }
+
+    public static boolean isConfigure()
+    {
+        return oSmsIsConfigure;
+    }
+
+    public static OSms getOSms()
+    {
+        return oSms;
     }
 }

@@ -7,6 +7,8 @@ import io.github.devalves.osms.core.exception.HttpApiOAuthOrangeException;
 import io.github.devalves.osms.core.exception.HttpApiOrangeException;
 import io.github.devalves.osms.model.OrangeSMS;
 import io.github.devalves.osms.model.response.error.ServiceException;
+import org.akanza.service.exception.ServiceHttpAuthOrangeException;
+import org.akanza.service.exception.ServiceIoConnectivityException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +24,6 @@ import java.util.Optional;
 public class SendSmsService
 {
     private final Logger LOG = LoggerFactory.getLogger(SendSmsService.class);
-    private static OSms oSms;
-    private static boolean oSmsIsInit = false;
     @Autowired
     private SmsService service;
 
@@ -33,10 +33,7 @@ public class SendSmsService
         if(isSent)
         {
             SMS sms;
-            if(senderName.isPresent())
-                sms = new SMS(receiver,content,senderName.get(),senderAddress,country);
-            else
-                sms = new SMS(receiver,content,"",senderAddress,country);
+            sms = senderName.map(s -> new SMS(receiver, content, s, senderAddress, country)).orElseGet(() -> new SMS(receiver, content, "", senderAddress, country));
             sms = service.save(sms);
             return sms;
         }
@@ -45,36 +42,37 @@ public class SendSmsService
 
     private boolean sendSms(String senderAddress,Optional<String> senderName,String receiver,String content,String country)
     {
-        if(oSmsIsInit)
+        boolean oSmsIsConfigure = SMSOrangeAccessService.isConfigure();
+        if(oSmsIsConfigure)
         {
             CountryCode countryCode = countryCode(country);
             OrangeSMS sms;
-            if(senderName.isPresent())
-                sms = new OrangeSMS(receiver,senderAddress,senderName.get(),content,countryCode);
-            else
-                sms = new OrangeSMS(receiver,senderAddress,content,countryCode);
+            sms = senderName.map(s -> new OrangeSMS(receiver, senderAddress, s, content, countryCode)).orElseGet(() -> new OrangeSMS(receiver, senderAddress, content, countryCode));
             try
             {
+                OSms oSms =  SMSOrangeAccessService.getOSms();
                 oSms.sendSms(sms);
                 LOG.info("SMS has been sent");
                 return true;
             }
-            catch(IOException | HttpApiOrangeException e)
+            catch(IOException e)
             {
                 e.printStackTrace();
-                if(e instanceof HttpApiOrangeException)
+                throw new ServiceIoConnectivityException();
+            }
+            catch(HttpApiOrangeException e)
+            {
+                if(e.errorIsService())
                 {
-                    if(((HttpApiOrangeException) e).errorIsService())
-                    {
-                        ServiceException serviceException = ((HttpApiOrangeException) e).getServiceException();
-                        String messageId = serviceException.getMessageId();
-                        LOG.error(messageId);
-                        String text = serviceException.getText();
-                        LOG.error(text);
-                        serviceException.getVariables()
-                                .parallelStream()
-                                .forEach(LOG::error);
-                    }
+                    ServiceException serviceException = e.getServiceException();
+                    String messageId = serviceException.getMessageId();
+                    LOG.error(messageId);
+                    String text = serviceException.getText();
+                    LOG.error(text);
+                    serviceException.getVariables()
+                            .parallelStream()
+                            .forEach(LOG::error);
+                    throw new ServiceHttpAuthOrangeException();
                 }
             }
         }
@@ -103,26 +101,4 @@ public class SendSmsService
         return CountryCode.senegal;
     }
 
-    public boolean initOSms(String clientId,String secretCode)
-    {
-        try
-        {
-            oSms = new OSms.BuilderOSms()
-                    .id(clientId)
-                    .secretCode(secretCode)
-                    .build();
-            oSmsIsInit = true;
-            LOG.info("OSms has been build with success");
-        }
-        catch(IOException | HttpApiOAuthOrangeException e)
-        {
-            e.printStackTrace();
-            if(e instanceof HttpApiOAuthOrangeException)
-            {
-                LOG.error(e.getMessage(),e);
-                LOG.error(((HttpApiOAuthOrangeException) e).getDescription(),e);
-            }
-        }
-        return oSmsIsInit;
-    }
 }

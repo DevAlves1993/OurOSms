@@ -1,5 +1,8 @@
 package org.akanza.config;
 
+import io.github.devalves.osms.OSms;
+import okhttp3.OkHttpClient;
+import org.akanza.service.SMSOrangeAccessService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -15,5 +18,13 @@ public class AppConfiguration
     public PasswordEncoder passwordEncoder()
     {
         return new BCryptPasswordEncoder(16);
+    }
+
+    @Bean
+    public OSms.BuilderOSms createOSms()
+    {
+        return new OSms.BuilderOSms()
+                .id("")
+                .secretCode("");
     }
 }
