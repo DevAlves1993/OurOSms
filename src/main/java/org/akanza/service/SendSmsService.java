@@ -1,5 +1,6 @@
 package org.akanza.service;
 
+import io.github.devalves.osms.model.response.error.ResponseError;
 import org.akanza.model.SMS;
 import io.github.devalves.osms.OSms;
 import io.github.devalves.osms.core.CountryCode;
@@ -72,7 +73,13 @@ public class SendSmsService
                     serviceException.getVariables()
                             .parallelStream()
                             .forEach(LOG::error);
-                    throw new ServiceHttpAuthOrangeException();
+                }
+                else
+                {
+                    ResponseError responseError = e.getResponseError();
+                    LOG.error("Code Error : "+responseError.getCode());
+                    LOG.error("Description Error : "+responseError.getDescription());
+                    LOG.error("Message Error : "+responseError.getMessage());
                 }
             }
         }
