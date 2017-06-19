@@ -4,6 +4,7 @@ import org.akanza.model.id.IdSmsSent;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
@@ -34,20 +35,29 @@ public class SmsSent implements Serializable
     @ManyToOne
     private SMS sms;
 
+    @Column(name = "date_envoi")
+    private LocalDateTime sentDate;
+
+    @Enumerated(value = EnumType.ORDINAL)
+    @Column(name = "type_envoi_erreur")
+    private SentErrorStatus status;
+
     public SmsSent()
     {
         // Not implemented
     }
 
-    public SmsSent(Receiver receiver, User user, SMS sms,Company company,Customer customer,Partner partner)
+    public SmsSent(User user, SMS sms,Company company,Customer customer,Partner partner,LocalDateTime sentDate
+            ,SentErrorStatus status)
     {
         this.company = company;
         this.customer = customer;
         this.partner = partner;
         this.user = user;
         this.sms = sms;
+        this.sentDate = sentDate;
+        this.status = status;
     }
-
 
     public User getUser()
     {
@@ -118,5 +128,12 @@ public class SmsSent implements Serializable
     public void setPartner(Partner partner)
     {
         this.partner = partner;
+    }
+
+    public enum SentErrorStatus
+    {
+        NOTHING,
+        SERVICE_ERROR,
+        RESPONSE_ERROR;
     }
 }
