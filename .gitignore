@@ -21,26 +21,21 @@
 !.vscode/launch.json
 !.vscode/extensions.json
 
-# WebUI dependencies
-webui/node_modules/
-webui/bower_components/
+######################
+#
+#  WebUI dependencies
+#
+######################
+# Files and directories created by pub
+webui/.packages
+webui/.pub/
+webui/build/
 # Remove the following pattern if you wish to check in your lock file
-pubspec.lock
-
-# misc
-**/.sass-cache
-**/npm-debug.log
+webui/pubspec.lock
 
 # Directory created by dartdoc
 webui/doc/api/
 
-# WebUI Builds
-tmp/
-
-# compiled output
-webui/dist
-webui/tmp
-webui/out-tsc
 
 
 # System Files
@@ -50,4 +45,3 @@ Thumbs.db
 #Other File
 mvnw
 mvnw.cmd
-
