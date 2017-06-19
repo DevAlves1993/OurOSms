@@ -1,0 +1,26 @@
+<div class="w3-top">
+   <div class="w3-bar w3-card-4 w3-center w3-light-grey">
+        <h3>OurOSMS</h3>
+   </div>
+</div>
+<div class="w3-display-middle">
+    <div class="w3-card-4">
+        <div class="w3-container w3-teal">
+            <h3 class="w3-center">Authentication</h3>
+        </div>
+        <form class="w3-container" #formModel="ngForm">
+            <material-input type="text" floatingLabel="true" 
+            label="User Login" requiredErrorMsg="Required field"
+            required>
+            </material-input>
+            <material-input type="password" floatingLabel="true"
+            label="User Password" requiredErrorMsg="Required field"
+            required>
+            </material-input>
+            <material-button (trigger)="login()" raised="true"></material-button>
+            <div *ngIf="formModel.valid" class="w3-container w3-light-red">
+                <h3 class="w3-center">Error</h3>
+            </div>
+        </form>
+    </div>
+</div>
