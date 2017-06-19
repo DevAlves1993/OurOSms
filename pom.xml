@@ -122,7 +122,7 @@
                             <outputDirectory>${project.basedir}/src/main/resources/webui</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>${project.basedir}/webui/dist</directory>
+                                    <directory>${project.basedir}/webui/build/web</directory>
                                     <excludes>
                                         <exclude>*.gz</exclude>
                                     </excludes>
