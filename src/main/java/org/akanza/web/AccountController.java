@@ -20,8 +20,8 @@ public class AccountController
     @Autowired
     private AccountService service;
 
-    @PostMapping
-    public ResponseEntity<AuthenticationResponse> authentication(AuthenticationRequest authentication)
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<AuthenticationResponse> authentication(@RequestBody  AuthenticationRequest authentication)
     {
         if(authentication != null &&
                 authentication.getLogin() != null && authentication.getPassword() != null)
@@ -49,7 +49,7 @@ public class AccountController
 
     @PutMapping(value = "/users",consumes = {MediaType.APPLICATION_JSON_VALUE}
             ,produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<User> updateUser(User user)
+    public ResponseEntity<User> updateUser(@RequestBody User user)
     {
         if(user != null)
         {

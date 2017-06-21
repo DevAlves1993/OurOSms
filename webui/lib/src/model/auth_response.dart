@@ -7,7 +7,7 @@ class AuthenticationResponse {
 
   AuthenticationResponse(this._token,this._firstName,this._lastName,this._words
     ,this._userId);
-  AuthenticationResponse.fromJson(Map<String,dynamic> value) {
+  AuthenticationResponse.fromMap(Map<String,dynamic> value) {
     if(value.containsKey("token"))
       this._token = value['token'];
     if(value.containsKey("firstName"))
@@ -29,7 +29,7 @@ class AuthenticationResponse {
   String get lastName => _lastName;
   void set lastName(String lastName) => _lastName = lastName;
 
-  String get word => _words;
+  String get words => _words;
   void set words(String words) => _words = words;
 
   int get userId => _userId;

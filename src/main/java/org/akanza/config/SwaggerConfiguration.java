@@ -52,9 +52,9 @@ public class SwaggerConfiguration
     private Predicate<String> createPredicatePath()
     {
         return or(regex("/api/auth.*"),
-                regex("/api/companies.*"),
-                regex("/api/customers.*"),
-                regex("/api/operation.*"),
-                regex("/api/users.*"));
+                regex("/api/v1/companies.*"),
+                regex("/api/v1/customers.*"),
+                regex("/api/v1/operation.*"),
+                regex("/api/v1/users.*"));
     }
 }

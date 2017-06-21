@@ -5,6 +5,8 @@ import 'package:angular2/angular2.dart';
 import 'package:angular_components/angular_components.dart';
 import 'package:angular2/platform/common.dart';
 import 'package:angular2/router.dart';
+import 'package:webui/src/login/login_component.dart';
+import 'package:webui/src/service/local_storage_service.dart';
 
 
 // AngularDart info: https://webdev.dartlang.org/angular
@@ -14,8 +16,8 @@ import 'package:angular2/router.dart';
   selector: 'my-app',
   styleUrls: const ['app_component.css'],
   templateUrl: 'app_component.html',
-  directives: const [materialDirectives],
-  providers: const [ROUTER_PROVIDERS,const Provider(LocationStrategy, useClass: HashLocationStrategy)]
+  directives: const [materialDirectives,COMMON_DIRECTIVES,LoginComponent],
+  providers: const [ROUTER_PROVIDERS,LocalStorageService,const Provider(LocationStrategy, useClass: HashLocationStrategy)]
 )
 class AppComponent {
   // Nothing here yet. All logic is in TodoListComponent.

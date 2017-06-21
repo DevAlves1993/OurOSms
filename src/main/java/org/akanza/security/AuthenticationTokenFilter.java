@@ -10,14 +10,17 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
+import org.springframework.security.web.util.matcher.AndRequestMatcher;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.OrRequestMatcher;
+import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,13 +31,22 @@ public class AuthenticationTokenFilter extends AbstractAuthenticationProcessingF
 {
     private Logger LOG = LoggerFactory.getLogger(AuthenticationTokenFilter.class);
 
-
     @Autowired
     private TokenUtils tokenUtils;
 
     public AuthenticationTokenFilter()
     {
-        super(new OrRequestMatcher(new AntPathRequestMatcher("/api/v1/**")));
+        super(new OrRequestMatcher(new RequestMatcher[]{
+                new AntPathRequestMatcher("/api/v1/companies/**"),
+                new AntPathRequestMatcher("/api/v1/companies"),
+                new AntPathRequestMatcher("/api/v1/customers/**"),
+                new AntPathRequestMatcher("/api/v1/customers"),
+                new AntPathRequestMatcher("/api/v1/operation/**"),
+                new AntPathRequestMatcher("/api/v1/users/**"),
+                new AntPathRequestMatcher("/api/v1/users"),
+                new AntPathRequestMatcher("/api/auth/users"),
+                new AntPathRequestMatcher("/api/auth/users/**")
+        }));
     }
 
     @Override

@@ -55,8 +55,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter
     @Override
     public void configure(WebSecurity web) throws Exception
     {
-        web.ignoring().antMatchers("/", "/resources/**", "/static/**", "/public/**"
-                , "/webui/**", "/h2-console/**", "/*.html", "/**/*.html" ,"/**/*.css","/**/*.js"
+        web.ignoring().antMatchers( "/resources/**", "/static/**", "/public/**"
+                , "/webui/**", "/*.html", "/**/*.html" ,"/**/*.css","/**/*.js"
                 ,"/**/*.png","/**/*.jpg", "/**/*.gif", "/**/*.svg", "/**/*.ico", "/**/*.ttf","/**/*.woff"
                 ,"/swagger-resources/**","/v2/api-docs/**","/webjars/**");
     }
@@ -68,9 +68,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter
             .authorizeRequests()
                 .antMatchers(HttpMethod.OPTIONS,"/**")
                     .permitAll()
-                .antMatchers("/api/auth")
+                .antMatchers(HttpMethod.POST,"/api/auth")
                     .permitAll()
-                .antMatchers("/")
+                .antMatchers(HttpMethod.GET,"/")
                     .permitAll()
                 .anyRequest()
                     .authenticated()

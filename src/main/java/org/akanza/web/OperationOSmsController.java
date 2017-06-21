@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  * Created by Christian Amani on 10/05/2017.
  */
 @RestController
-@RequestMapping("/api/operation")
+@RequestMapping("/api/v1/operation")
 public class OperationOSmsController
 {
     @Autowired
