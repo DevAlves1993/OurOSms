@@ -58,7 +58,7 @@ class AuthenticationService {
 
   void _saveUserInfoInLocalStorage(Map<String,dynamic> body) {
     AuthenticationResponse authResponse = new AuthenticationResponse.fromMap(body);
-    _serviceStorage.saveElement(authResponse.toString(),authResponse.token);
+    _serviceStorage.saveElement("token", authResponse.token);
     String id = authResponse.userId.toString();
     _serviceStorage.saveElement("id",id);
     _serviceStorage.saveElement("firstName",authResponse.firstName);
