@@ -32,7 +32,9 @@ public class AuthenticationTokenFilter extends AbstractAuthenticationProcessingF
 
     public AuthenticationTokenFilter()
     {
-        super(new NegatedRequestMatcher(new AntPathRequestMatcher("/api/auth")));
+        super(new OrRequestMatcher(new AntPathRequestMatcher("/api/auth/users")
+                ,new AntPathRequestMatcher("api/auth/users/**")
+                ,new AntPathRequestMatcher("api/v1/**")));
     }
 
     @Override

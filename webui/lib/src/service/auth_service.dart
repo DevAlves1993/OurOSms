@@ -14,6 +14,7 @@ import 'package:webui/src/service/local_storage_service.dart';
 class AuthenticationService {
   final Map<String,String> _headers = {"Content-Type":"application/json"};
   final String _url = "/api/auth";
+  final String _urlTest = "http://localhost:9090/api/auth";
   final Client _client;
   final LocalStorageService _serviceStorage;
   final Router _router;
@@ -25,7 +26,7 @@ class AuthenticationService {
     String password = request.password;
     if((login != null && login.isNotEmpty) && (password != null && password.isNotEmpty)) {
       String json = JSON.encode(request.toMap());
-      return await _client.post(_url,body: json,headers: _headers)
+      return await _client.post(_urlTest,body: json,headers: _headers)
         .catchError(null)
         .then((response) => verifyResponseStatys(response));
     }
