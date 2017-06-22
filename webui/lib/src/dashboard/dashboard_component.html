@@ -1,0 +1,27 @@
+<form-sidebar></form-sidebar>
+<div id="home">
+    <div class="w3-top w3-black">
+        <div class="w3-container">
+            <div class="w3-cell w3-left">
+                <material-button (trigger)="openOrClose()">
+                    <i class="fa fa-bars w3-large"></i>
+                </material-button>
+            </div>
+            <div class="w3-cell w3-right">
+                <material-button>
+                    <i class="fa fa-circle-thin w3-large"></i>
+                </material-button>
+            </div>
+            <div class="w3-cell w3-right">
+                <material-button>
+                    <i class="fa fa-bell-o w3-large"></i>
+                </material-button>
+            </div>
+        </div>
+    </div>
+    <div class="w3-container">
+       <div class="w3-section">
+            <router-outlet></router-outlet>
+       </div>
+    </div>
+</div>

@@ -1,13 +1,36 @@
+import 'dart:html' as html;
+
 import 'package:angular2/angular2.dart';
 import 'package:angular2/router.dart';
 import 'package:angular_components/angular_components.dart';
+import 'package:webui/src/sidebar/sidebar_component.dart';
 
 
 @Component(selector: "form-dashboard"
   ,templateUrl: "dashboard_component.html"
   ,styleUrls: const ["dashboard_component.css"]
-  ,directives: const [materialDirectives,COMMON_DIRECTIVES]
+  ,directives: const [materialDirectives,COMMON_DIRECTIVES,SidebarComponent]
   ,providers: const [materialProviders])
-class DashboardComponent {
-  
+class DashboardComponent implements OnInit{
+  bool isOpen = false;
+
+  void openOrClose() {
+    isOpen = !isOpen;
+   if(isOpen) {
+    html.Element sideBar = html.document.getElementById("mySidebar");
+    sideBar.style.display = "block";
+    html.Element homeElement = html.document.getElementById("home");
+    homeElement.style.marginLeft = "20%";
+   }
+   else {
+    html.Element sideBar = html.document.getElementById("mySidebar");
+    sideBar.style.display = "none";
+    html.Element homeElement = html.document.getElementById("home");
+    homeElement.style.marginLeft = "0%";
+   }
+  }
+  @override
+  ngOnInit() {
+    openOrClose();
+  }
 }
