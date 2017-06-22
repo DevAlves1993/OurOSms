@@ -53,7 +53,8 @@ class AuthenticationService {
   }
 
   void redirectToViewDashboard() {
-      // TODO : Navigate To View Dasboard
+      html.window.console.info("Redirect To Home Component");
+      _router.navigate(const ["/Dashboard"]);
   }
 
   void _saveUserInfoInLocalStorage(Map<String,dynamic> body) {
@@ -64,5 +65,6 @@ class AuthenticationService {
     _serviceStorage.saveElement("firstName",authResponse.firstName);
     _serviceStorage.saveElement("lastName", authResponse.lastName);
     _serviceStorage.saveElement("words", authResponse.words);
+    _serviceStorage.saveElement("isAuthenticated", "true");
   }
 }

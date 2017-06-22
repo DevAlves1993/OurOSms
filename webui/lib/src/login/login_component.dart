@@ -11,15 +11,21 @@ import 'package:webui/src/service/auth_service.dart';
   ,directives: const [materialDirectives,COMMON_DIRECTIVES]
   ,providers: const [materialProviders, AuthenticationService])
 class LoginComponent implements OnInit{
+  final AuthenticationService _authService;
   AuthenticationRequest auth;
   bool formIsNotValid = false;
-  final AuthenticationService _authService;
+  bool isCheck = false;
+
   LoginComponent(this._authService);
 
   void submit() {
+    isCheck = true;
     _authService.login(auth)
       .then((b) => b ? _authService.redirectToViewDashboard() : formIsNotValid = true)
-      .whenComplete(() => html.window.console.info("A authentication request is perform"));
+      .whenComplete(() {
+        html.window.console.info("A authentication request is perform");
+        isCheck = false;
+      });
   }
   @override
   ngOnInit() {

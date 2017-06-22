@@ -11,8 +11,12 @@ import 'package:webui/src/sidebar/sidebar_component.dart';
   ,styleUrls: const ["dashboard_component.css"]
   ,directives: const [materialDirectives,COMMON_DIRECTIVES,SidebarComponent]
   ,providers: const [materialProviders])
-class DashboardComponent implements OnInit{
+@CanActivate(authentication)
+class DashboardComponent implements OnInit {
+
   bool isOpen = false;
+
+  DashboardComponent();
 
   void openOrClose() {
     isOpen = !isOpen;
@@ -29,8 +33,30 @@ class DashboardComponent implements OnInit{
     homeElement.style.marginLeft = "0%";
    }
   }
+
   @override
   ngOnInit() {
     openOrClose();
   }
 }
+
+/**
+ * Global Injector for the project
+ */
+Injector myInjector;
+/**
+ * Function for the Authentication
+ */
+bool authentication(ComponentInstruction next, ComponentInstruction prev) {
+  String value = html.window.localStorage['isAuthenticated'];
+  html.window.console.info("Method isAuthenticate is perform");
+  if(value  == null) {
+    Router router = myInjector.get(Router);
+    html.window.console.info("Redirect To Login Componenent");
+    router.navigate(const ["/Login"]);
+    return false;
+  }
+  html.window.console.info("Component is Activate");
+  return true;
+}
+
