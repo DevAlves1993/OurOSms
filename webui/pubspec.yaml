@@ -5,7 +5,7 @@ homepage: https://github.com/DevAlves1993/OurOSms
 author: Christian Amani <email@example.com>
 
 environment:
-  sdk: '>=1.23.0 <2.0.0'
+  sdk: '>=1.24.2 <2.0.0'
 
 dependencies:
   angular2: ^3.0.0
