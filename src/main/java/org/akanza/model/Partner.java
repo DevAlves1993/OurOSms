@@ -1,5 +1,11 @@
 package org.akanza.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+import org.akanza.model.utils.LocalDateConverter;
 import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
@@ -21,7 +27,11 @@ public class Partner extends Receiver
     private String urlWebSite;
     @Column(name = "libelle")
     private String words;
-    @Column(name = "créer")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+    @JsonSerialize(using = LocalDateSerializer.class)
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @Column(name = "créer",columnDefinition = "DATE")
+    @Convert(converter = LocalDateConverter.class)
     private LocalDate created;
     @Column(name = "numero_1")
     private String numberPhone1;

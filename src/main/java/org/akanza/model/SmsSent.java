@@ -1,6 +1,14 @@
 package org.akanza.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import org.akanza.model.id.IdSmsSent;
+import org.akanza.model.utils.LocalDateTimeConverter;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -35,7 +43,11 @@ public class SmsSent implements Serializable
     @ManyToOne
     private SMS sms;
 
-    @Column(name = "date_envoi")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-ddTHH:mm:ss")
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    @Column(name = "date_envoi",columnDefinition = "TIMESTAMP")
+    @Convert(converter = LocalDateTimeConverter.class)
     private LocalDateTime sentDate;
 
     @Enumerated(value = EnumType.ORDINAL)

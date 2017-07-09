@@ -1,10 +1,16 @@
 package org.akanza.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+import org.akanza.model.utils.LocalDateConverter;
 import org.hibernate.validator.constraints.Email;
+import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -39,7 +45,11 @@ public class User implements UserDetails,Serializable
     private String lastName;
     @Column(name = "libelle", length = 1000)
     private String words;
-    @Column(name = "créer")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+    @JsonSerialize(using = LocalDateSerializer.class)
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @Column(name = "créer", columnDefinition = "DATE")
+    @Convert(converter = LocalDateConverter.class)
     private LocalDate created;
     @Column(name = "numero_1",unique = true)
     private String numberPhone1;
