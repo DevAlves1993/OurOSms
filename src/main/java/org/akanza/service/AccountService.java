@@ -48,6 +48,59 @@ public class AccountService
         return null;
     }
 
+    public AuthenticationResponse refreshToken(String token)
+    {
+        boolean expiate = tokenUtils.isExpiate(token);
+        boolean isDefinitivelyExpiate = tokenUtils.isDefinitivelyExpired(token);
+        if(!isDefinitivelyExpiate)
+        {
+            if(!expiate)
+            {
+                String newToken = tokenUtils.refreshToken(token);
+                String userId = tokenUtils.getUserId(token);
+                User user = repository.findById(Long.valueOf(userId));
+                if(user != null)
+                {
+                    String firstName = "";
+                    if(user.getFirstName() != null)
+                        firstName = user.getFirstName();
+                    String lastName = "";
+                    if(user.getLastName() != null)
+                        lastName = user.getLastName();
+                    String words = "";
+                    if(user.getWords() != null)
+                        words = user.getWords();
+                    long id = user.getId();
+                    return new AuthenticationResponse(newToken,id,firstName,lastName,words);
+                }
+                else
+                    return new AuthenticationResponse(newToken,-1,"","","");
+            }
+            else
+            {
+                String userId = tokenUtils.getUserId(token);
+                User user = repository.findOne(Long.valueOf(userId));
+                if(user != null)
+                {
+                    String firstName = "";
+                    if(user.getFirstName() != null)
+                        firstName = user.getFirstName();
+                    String lastName = "";
+                    if(user.getLastName() != null)
+                        lastName = user.getLastName();
+                    String words = "";
+                    if(user.getWords() != null)
+                        words = user.getWords();
+                    long id = user.getId();
+                    return new AuthenticationResponse(token,id,firstName,lastName,words);
+                }
+                else
+                    return new AuthenticationResponse(token,-1,"","","");
+            }
+        }
+        else
+            return null;
+    }
 
     public User create(User user)
     {
@@ -108,8 +161,9 @@ public class AccountService
     {
         String login = user.getLogin();
         String password = user.getPassword();
+        String userId = String.valueOf(user.getId());
         String authority = user.getAuthority()
                 .getAuthority();
-        return tokenUtils.createToken(login, password, authority);
+        return tokenUtils.createToken(login, password, authority, userId);
     }
 }

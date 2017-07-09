@@ -14,26 +14,11 @@ import org.springframework.web.bind.annotation.*;
  * Created by Christian Amani on 03/05/2017.
  */
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/api/v1/account")
 public class AccountController
 {
     @Autowired
     private AccountService service;
-
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<AuthenticationResponse> authentication(@RequestBody  AuthenticationRequest authentication)
-    {
-        if(authentication != null &&
-                authentication.getLogin() != null && authentication.getPassword() != null)
-        {
-            AuthenticationResponse response = service.authenticate(authentication);
-            if(response != null)
-                return new ResponseEntity<>(response, HttpStatus.CREATED);
-            else
-                return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
 
     @PostMapping(value = "/users",consumes = {MediaType.APPLICATION_JSON_VALUE}
             ,produces = {MediaType.APPLICATION_JSON_VALUE})

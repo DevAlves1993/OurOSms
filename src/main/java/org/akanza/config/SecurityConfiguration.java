@@ -1,6 +1,7 @@
 package org.akanza.config;
 
 import org.akanza.security.*;
+import org.akanza.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -12,6 +13,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.access.channel.ChannelProcessingFilter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import java.util.Collections;
@@ -33,6 +35,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter
     @Autowired
     private AuthenticationEntryError entryError;
 
+    @Autowired
+    private AccountService accountService;
+
     @Bean
     @Override
     public AuthenticationManager authenticationManager() throws Exception
@@ -41,12 +46,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter
     }
 
     @Bean
-    public AuthenticationTokenFilter authenticationTokenFilter() throws Exception
+    public AuthorisationTokenFilter authorisationTokenFilter() throws Exception
     {
-        AuthenticationTokenFilter authenticationTokenFilter = new AuthenticationTokenFilter();
-        authenticationTokenFilter.setAuthenticationManager(authenticationManager());
-        authenticationTokenFilter.setAuthenticationSuccessHandler(new AuthenticationSuccess());
-        return authenticationTokenFilter;
+        AuthorisationTokenFilter authorisationTokenFilter = new AuthorisationTokenFilter();
+        authorisationTokenFilter.setAuthenticationManager(authenticationManager());
+        authorisationTokenFilter.setAuthenticationSuccessHandler(new AuthenticationSuccess());
+        return authorisationTokenFilter;
     }
 
     @Override
@@ -72,7 +77,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter
                 .anyRequest()
                     .authenticated()
             .and()
-            .addFilterBefore(authenticationTokenFilter(),UsernamePasswordAuthenticationFilter.class)
+            .addFilterBefore(new AuthenticationTokenFilter(accountService), UsernamePasswordAuthenticationFilter.class)
+            .addFilterBefore(authorisationTokenFilter(),UsernamePasswordAuthenticationFilter.class)
             .headers()
                 .cacheControl().disable()
             .and()

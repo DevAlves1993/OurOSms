@@ -4,9 +4,11 @@ import io.github.devalves.osms.OSms;
 import io.github.devalves.osms.core.exception.HttpApiOAuthOrangeException;
 import org.akanza.service.exception.ServiceHttpAuthOrangeException;
 import org.akanza.service.exception.ServiceIoConnectivityException;
+import org.akanza.utils.TokenUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +25,11 @@ public class SMSOrangeAccessService
 
     @Autowired
     private OSms.BuilderOSms builderOSms;
+    @Autowired
+    private TokenUtils utils;
+
+    @Value("${akanza.jwt.tokenForOrange}")
+    private String orangeJwtKey;
 
     private static OSms oSms = null;
     private static String clientId = "";
@@ -54,6 +61,13 @@ public class SMSOrangeAccessService
         }
     }
 
+    public boolean save(String token)
+    {
+        String secretId = utils.getOrangeSecretId(token);
+        String secretKey = utils.getOrangeSecretKey(token);
+        return writeAccessOrange(secretId, secretKey);
+    }
+
     public boolean writeAccessOrange(String clientId,String secretKey)
     {
         boolean writeAccessWithSuccess = false;
@@ -61,8 +75,6 @@ public class SMSOrangeAccessService
         {
             File file = pathResource.getFile();
             System.out.println(file);
-            file.setWritable(true);
-            file.setReadable(true);
             FileWriter fileWriter = new FileWriter(file);
             BufferedWriter writer = new BufferedWriter(fileWriter);
             writer.write(clientId);
@@ -101,6 +113,11 @@ public class SMSOrangeAccessService
             e.printStackTrace();
             LOG.info("Reading Orange Access Failed");
         }
+    }
+
+    public String obtainOrangeJwtKey()
+    {
+        return orangeJwtKey;
     }
 
     public static String getClientId()
